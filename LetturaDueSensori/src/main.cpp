@@ -25,7 +25,7 @@ unsigned long tStart_DHT = 0, tStart_POT = 0;
 float temperature = 0.0, soglia = 0.0;
 bool readSuccess = false, bufferFull = false;
 int oldAnalogRead = 0, indexScrittura = 0, sum = 0;
-int arrayVal[] = {0, 0, 0};
+int arrayVal[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int arraySize = sizeof(arrayVal) / sizeof(arrayVal[0]);
 
 DHT dht(DHTPIN, DHTTYPE);
