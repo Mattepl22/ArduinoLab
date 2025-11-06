@@ -8,14 +8,15 @@
 
 int mediaMobileCircolare(int *array, int arraySize, int *indexScrittura, int newValue, int *sum, bool *bufferFull) {
 
-  if(*indexScrittura == (arraySize - 1)) {
-    *bufferFull = true;
-  }
-
   *sum -= array[*indexScrittura];
   array[*indexScrittura] = newValue;
   *sum += newValue;
+  
   *indexScrittura = (*indexScrittura + 1) % (arraySize);
+
+  if (*indexScrittura == 0) {
+    *bufferFull = true;
+  }
 
   return *sum/arraySize;
 }
