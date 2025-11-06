@@ -6,8 +6,12 @@
 
 #define PPIN A1
 
-int mediaMobileCircolare(int *array, int arraySize, int *indexScrittura, int newValue, int *sum) {
-  
+int mediaMobileCircolare(int *array, int arraySize, int *indexScrittura, int newValue, int *sum, bool *bufferFull) {
+
+  if(*indexScrittura == (arraySize - 1)) {
+    *bufferFull = true;
+  }
+
   *sum -= array[*indexScrittura];
   array[*indexScrittura] = newValue;
   *sum += newValue;
@@ -18,7 +22,7 @@ int mediaMobileCircolare(int *array, int arraySize, int *indexScrittura, int new
 
 unsigned long tStart_DHT = 0, tStart_POT = 0;
 float temperature = 0.0, soglia = 0.0;
-bool readSuccess = false;
+bool readSuccess = false, bufferFull = false;
 int oldAnalogRead = 0, indexScrittura = 0, sum = 0;
 int arrayVal[] = {0, 0, 0};
 int arraySize = sizeof(arrayVal) / sizeof(arrayVal[0]);
@@ -47,9 +51,9 @@ void loop() {
 
   if (micros() - tStart_POT >= 5000) {
 
-    int NewValMed = mediaMobileCircolare(arrayVal, arraySize, &indexScrittura, analogRead(PPIN), &sum);
+    int NewValMed = mediaMobileCircolare(arrayVal, arraySize, &indexScrittura, analogRead(PPIN), &sum, &bufferFull);
 
-    if (NewValMed != oldAnalogRead) {
+    if ((NewValMed != oldAnalogRead) && bufferFull) {
       Serial.println(NewValMed);
       oldAnalogRead = NewValMed;
     }
