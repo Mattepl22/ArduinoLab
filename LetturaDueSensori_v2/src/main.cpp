@@ -8,7 +8,9 @@
 
 #define PPIN A1
 
-unsigned long tStart_DHT = 0, tStart_POT = 0;
+#define TIMER_MILLIS false
+#define TIMER_MICROS true
+
 float temperature = 0.0, soglia = 0.0;
 bool readSuccess = false;
 int oldAnalogRead = 0;
@@ -17,6 +19,8 @@ int arraySize = sizeof(arrayVal) / sizeof(arrayVal[0]);
 
 DHT dht(DHTPIN, DHTTYPE);
 MediaMobile filtro;
+Timer timer_DHT;
+Timer timer_POT;
 
 void setup() {
   Serial.begin(115200);
@@ -27,20 +31,19 @@ void setup() {
 
   mediaMobileInit(&filtro, arrayVal, arraySize);
 
-  tStart_DHT = millis();
-  tStart_POT = micros();
+  timerInit(&timer_DHT, 2000, TIMER_MILLIS);
+  timerInit(&timer_POT, 5000, TIMER_MICROS);
 }
 
 void loop() {
-  if (millis() - tStart_DHT >= 2000) {
+
+  if (timerTrigger(&timer_DHT)) {
+
     temperature = dht.readTemperature();
-
     Serial.println(temperature);
-
-    tStart_DHT += 2000;
   }
 
-  if (micros() - tStart_POT >= 5000) {
+  if (timerTrigger(&timer_POT)) {
 
     int NewValMed = mediaMobileUpdate(&filtro, analogRead(PPIN));
 
@@ -48,7 +51,5 @@ void loop() {
       Serial.println(NewValMed);
       oldAnalogRead = NewValMed;
     }
-
-    tStart_POT += 5000;
   }
 }

@@ -29,3 +29,34 @@ int mediaMobileUpdate(MediaMobile *m, int newValue) {
 
     return m->sum/divisor;
 }
+
+// TIMER
+
+void timerInit(Timer *t, unsigned long trigger, bool mode) {
+    //Di default è millis(), se metti true è micros()
+
+    t->trigger = trigger;
+    t->mode = mode;
+
+    if (!mode) {
+        t->previousTime = millis();
+    } else {
+        t->previousTime = micros();
+    }
+}
+
+bool timerTrigger(Timer *t) {
+
+    if (t->trigger == 0) return false;
+
+    if (((!t->mode) && (millis() - t->previousTime > t->trigger)) || ((t->mode) && (micros() - t->previousTime > t->trigger))) {
+        t->previousTime += t->trigger;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void timerReset(Timer *t) {
+    t->previousTime = t->mode ? micros() : millis();
+}
