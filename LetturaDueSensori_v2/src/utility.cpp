@@ -49,12 +49,14 @@ bool timerTrigger(Timer *t) {
 
     if (t->trigger == 0) return false;
 
-    if (((!t->mode) && (millis() - t->previousTime > t->trigger)) || ((t->mode) && (micros() - t->previousTime > t->trigger))) {
+    unsigned long now = t->mode ? micros() : millis();
+
+    if (now - t->previousTime > t->trigger) {
         t->previousTime += t->trigger;
         return true;
-    } else {
-        return false;
     }
+
+    return false;    
 }
 
 void timerReset(Timer *t) {
