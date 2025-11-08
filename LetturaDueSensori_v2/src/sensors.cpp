@@ -2,7 +2,7 @@
 
 // TEMPERATURA + LED
 
-void dhtSensorInit(DhtSensor *s, uint8_t pin, uint8_t type) {
+void dhtSensorInit(DhtSensor *s, uint8_t pin, uint8_t type, unsigned long trigger, bool mode) {
     s->pin = pin;
     s->type = type;
 
