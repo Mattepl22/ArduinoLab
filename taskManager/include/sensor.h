@@ -29,6 +29,7 @@ typedef struct DhtSensor DhtSensor;
 
 void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type);
 void dhtSensorTask(DhtSensor *ds, Led *l, float soglia);
+void dhtTask(void *param);
 
 // ---- POTENZIOMETRO ----
 
@@ -43,5 +44,6 @@ typedef struct Potenziometro Potenziometro;
 
 void potenziometroInit(Potenziometro *p, uint8_t pin);
 void potenziometroUpdate(Potenziometro *p);
+void potenziometroTask(void *param);
 
 #endif
