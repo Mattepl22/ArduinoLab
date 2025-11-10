@@ -14,6 +14,6 @@ struct MediaMobile {
 typedef struct MediaMobile MediaMobile;
 
 void mediaMobileInit(MediaMobile *m, int *array, int size);
-int mediaModibleUpdate(MediaMobile *m, int newValue);
+int mediaMobileUpdate(MediaMobile *m, int newValue);
 
 #endif

@@ -17,7 +17,7 @@ void ledCmd(Led *l, bool greenPin_state, bool redPin_state) {
 
 // ---- DHT ----
 
-void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type, unsigned long timerTrig, bool timerMode = false) {
+void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type) {
     ds->dht = new DHT(pin, type);
     ds->dht->begin();
 }
@@ -32,9 +32,11 @@ void dhtSensorTask(DhtSensor *ds, Led *l, float soglia) {
 
 // ---- POTENZIOMETRO ----
 
-void potenziometroInit(Potenziometro *p, uint8_t pin, unsigned long timerTrig, bool timerMode = false) {
+void potenziometroInit(Potenziometro *p, uint8_t pin) {
     p->pin = pin;
     p->oldValue = 0;
+
+    pinMode(pin, INPUT);
 
     mediaMobileInit(&p->mediaMobile, p->arrayVal, sizeof(p->arrayVal) / sizeof(p->arrayVal[0]));
 }

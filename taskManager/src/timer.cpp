@@ -14,9 +14,10 @@ bool timerTrigger(Timer *t) {
 
     if (now - t->previousTime > t->trigger) {
         t->previousTime += t->trigger;
+        return true;
     }
-    
-    return true;
+
+    return false;
 }
 
 void timerReset(Timer *t) {

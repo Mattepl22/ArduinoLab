@@ -11,7 +11,8 @@ void dhtTask(void *param) {
 void potenziometroTask(void *param) {
     System *sys = (System *)param;
 
-    int newValue = analogRead(sys->potenziometro.pin);
+    int newValue = mediaMobileUpdate(&sys->potenziometro.mediaMobile, analogRead(sys->potenziometro.pin));
+
     if((newValue != sys->potenziometro.oldValue) && sys->potenziometro.mediaMobile.full) {
         Serial.println(newValue);
         sys->potenziometro.oldValue = newValue;
