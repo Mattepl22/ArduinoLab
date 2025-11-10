@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include "DHT.h"
 #include "timer.h"
+#include "filtro.h"
+#include "config.h"
 
 // ---- LED ----
 
@@ -28,5 +30,20 @@ typedef struct DhtSensor DhtSensor;
 
 void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type, unsigned long timerTrig, bool timerMode = false);
 void dhtSensorTask(DhtSensor *ds, Led *l, float soglia);
+
+// ---- POTENZIOMETRO ----
+
+struct Potenziometro {
+    uint8_t pin;
+    int arrayVal[DIMENSIONE_BUFFER];
+    int oldValue;
+    MediaMobile mediaMobile;
+    Timer timer;
+};
+
+typedef struct Potenziometro Potenziometro;
+
+void potenziometroInit(Potenziometro *p, uint8_t pin, unsigned long timerTrig, bool timerMode = false);
+void potenziometroUpdate(Potenziometro *p);
 
 #endif

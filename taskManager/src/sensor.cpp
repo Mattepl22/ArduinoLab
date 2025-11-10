@@ -33,3 +33,24 @@ void dhtSensorTask(DhtSensor *ds, Led *l, float soglia) {
         ledCmd(l, temperature <= soglia, temperature > soglia);
     }
 }
+
+// ---- POTENZIOMETRO ----
+
+void potenziometroInit(Potenziometro *p, uint8_t pin, unsigned long timerTrig, bool timerMode = false) {
+    p->pin = pin;
+    p->oldValue = 0;
+
+    mediaMobileInit(&p->mediaMobile, p->arrayVal, sizeof(p->arrayVal) / sizeof(p->arrayVal[0]));
+    timerInit(&p->timer, timerTrig, timerMode);
+}
+
+void potenziometroUpdate(Potenziometro *p) {
+    if (timerTrigger(&p->timer)) {
+        int newValue = analogRead(p->pin);
+        
+        if ((newValue != p->oldValue) && p->mediaMobile.full) {
+            Serial.println(newValue);
+            p->oldValue = newValue;
+        }
+    }
+}
