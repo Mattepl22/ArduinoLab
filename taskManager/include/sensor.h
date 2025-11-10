@@ -23,12 +23,11 @@ void ledCmd(Led *l, bool greenPin_state, bool redPin_state);
 
 struct DhtSensor {
     DHT *dht;
-    Timer timer;
 };
 
 typedef struct DhtSensor DhtSensor;
 
-void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type, unsigned long timerTrig, bool timerMode = false);
+void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type);
 void dhtSensorTask(DhtSensor *ds, Led *l, float soglia);
 
 // ---- POTENZIOMETRO ----
@@ -38,12 +37,11 @@ struct Potenziometro {
     int arrayVal[DIMENSIONE_BUFFER];
     int oldValue;
     MediaMobile mediaMobile;
-    Timer timer;
 };
 
 typedef struct Potenziometro Potenziometro;
 
-void potenziometroInit(Potenziometro *p, uint8_t pin, unsigned long timerTrig, bool timerMode = false);
+void potenziometroInit(Potenziometro *p, uint8_t pin);
 void potenziometroUpdate(Potenziometro *p);
 
 #endif

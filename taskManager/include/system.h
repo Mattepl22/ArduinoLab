@@ -27,13 +27,13 @@ typedef struct Task Task;
 struct TaskManager {
     Task task[MAX_TASK];
     uint8_t taskCount;
-    Timer timer;
+    Timer timer[MAX_TASK];
 };
 
 typedef struct TaskManager TaskManager;
 
 void taskManagerInit(TaskManager *tm);
-bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param);
+bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long timerTrigger, bool timerMode = false);
 void taskManagerRun(TaskManager *tm);
 
 #endif

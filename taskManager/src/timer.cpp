@@ -8,14 +8,15 @@ void timerInit(Timer *t, unsigned long trigger, bool mode) {
 }
 
 bool timerTrigger(Timer *t) {
-    if (t->trigger = 0) return false;
+    if (t->trigger == 0) return false;
 
     unsigned long now = t->mode ? micros() : millis();
 
     if (now - t->previousTime > t->trigger) {
         t->previousTime += t->trigger;
-        return true;
     }
+    
+    return true;
 }
 
 void timerReset(Timer *t) {
