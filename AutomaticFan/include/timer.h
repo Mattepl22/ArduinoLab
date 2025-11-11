@@ -1,7 +1,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 struct Timer {
     unsigned long previousTime;

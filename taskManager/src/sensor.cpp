@@ -1,4 +1,5 @@
 #include "sensor.h"
+#include "system.h"
 
 // ---- LED ----
 
@@ -22,12 +23,12 @@ void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type) {
     ds->dht->begin();
 }
 
-void dhtSensorTask(DhtSensor *ds, Led *l, float soglia) {
-    float temperature = ds->dht->readTemperature();
+void dhtTask(void *param) {
+    System *sys = (System *)param;
 
+    float temperature = sys->dhtSensor.dht->readTemperature();
     Serial.println(temperature);
-
-    ledCmd(l, temperature <= soglia, temperature > soglia);
+    ledCmd(&sys->led, temperature <= SOGLIA_TEMPERATURA, temperature > SOGLIA_TEMPERATURA);
 }
 
 // ---- POTENZIOMETRO ----
@@ -41,11 +42,13 @@ void potenziometroInit(Potenziometro *p, uint8_t pin) {
     mediaMobileInit(&p->mediaMobile, p->arrayVal, sizeof(p->arrayVal) / sizeof(p->arrayVal[0]));
 }
 
-void potenziometroUpdate(Potenziometro *p) {
-    int newValue = analogRead(p->pin);
-    
-    if ((newValue != p->oldValue) && p->mediaMobile.full) {
+void potenziometroTask(void *param) {
+    System *sys = (System *)param;
+
+    int newValue = mediaMobileUpdate(&sys->potenziometro.mediaMobile, analogRead(sys->potenziometro.pin));
+
+    if((newValue != sys->potenziometro.oldValue) && sys->potenziometro.mediaMobile.full) {
         Serial.println(newValue);
-        p->oldValue = newValue;
+        sys->potenziometro.oldValue = newValue;
     }
 }

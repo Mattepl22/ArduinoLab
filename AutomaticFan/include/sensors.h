@@ -3,6 +3,8 @@
 
 #include "DHT.h"
 
+struct System;
+
 // ---- DHT ----
 
 struct DhtSensor {
@@ -12,5 +14,6 @@ struct DhtSensor {
 typedef struct DhtSensor DhtSensor;
 
 void dhtSensorInit(DhtSensor *ds, uint8_t pin, uint8_t type);
+void dhtSensorTask(void *param);
 
 #endif
