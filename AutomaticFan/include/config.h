@@ -7,10 +7,10 @@
 #define TIMER_MILLIS false
 #define TIMER_MICROS true
 
-#define TIMER_DHT_MS = 2000;
+#define TIMER_DHT_MS 2000
 
 // ---- DHT ----
-#define DHT_PIN 2
+#define DHT_PIN 13
 #define DHT_TYPE DHT11
 
 // ---- TASK ----

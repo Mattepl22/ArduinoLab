@@ -18,8 +18,8 @@ void systemInit(System *sys);
 // ---- TASK MANAGER ----
 
 struct Task {
-    void (*callback)(void *);
-    Timer timer;
+    void (*callback)(void *); // Puntatore a funzione
+    void *param; // Parametro generico
 };
 
 typedef struct Task Task;
@@ -27,11 +27,13 @@ typedef struct Task Task;
 struct TaskManager {
     Task task[MAX_TASK];
     uint8_t tCount;
+    Timer timer[MAX_TASK];
 };
 
 typedef struct TaskManager TaskManager;
 
 void taskManagerInit(TaskManager *tm);
-bool taskManagerAdd(TaskManager *tm);
+bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long timerTrigger, bool timerMode = false);
+void taskManagerRun(TaskManager *tm);
 
 #endif
