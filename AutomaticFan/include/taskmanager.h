@@ -10,7 +10,7 @@
 
 struct System {
     DhtSensor dhtSensor;
-    Data *data;
+    Data data;
 };
 
 typedef struct System System;

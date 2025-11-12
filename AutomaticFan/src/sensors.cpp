@@ -13,6 +13,6 @@ void dhtSensorTask(void *param) {
     float temperature = sys->dhtSensor.dht->readTemperature();
     Serial.println(temperature);
 
-    sys->data->temperature = temperature;
-    sys->data->newValue = true;
+    sys->data.temperature = temperature;
+    sys->data.newValue = true;
 }
