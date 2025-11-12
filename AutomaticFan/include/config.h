@@ -14,9 +14,9 @@
 #define DHT_TYPE DHT11
 
 // ---- LED ----
-#define BPIN 1
-#define GPIN 2
-#define RPIN 3
+#define BPIN 2
+#define GPIN 3
+#define RPIN 4
 
 // ---- TASK ----
 #define MAX_TASK 10

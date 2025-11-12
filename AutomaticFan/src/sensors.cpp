@@ -13,7 +13,7 @@ void dhtSensorTask(void *param) {
     System *sys = (System *)param;
 
     float temperature = sys->dhtSensor.dht->readTemperature();
-    Serial.println(temperature);
+    //Serial.println(temperature);
 
     sys->data.temperature = temperature;
     sys->data.newValue = true;
@@ -40,6 +40,8 @@ void ledCmd(bool bLedCmd, bool gLedCmd, bool rLedCmd) {
 
 void ledTask(void *param) {
     System *sys = (System *)param;
+
+    Serial.println(sys->data.temperature);
 
     if (!sys->data.newValue) return;
 
