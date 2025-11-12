@@ -16,5 +16,8 @@
 // ---- TASK ----
 #define MAX_TASK 10
 
+// ---- DATA ----
+#define MAX_DATA 5
+
 
 #endif

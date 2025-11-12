@@ -2,6 +2,7 @@
 #define TASKMANAGER_H
 
 #include "sensors.h"
+#include "comunication.h"
 #include "timer.h"
 #include "config.h"
 
@@ -9,6 +10,7 @@
 
 struct System {
     DhtSensor dhtSensor;
+    Data *data;
 };
 
 typedef struct System System;
@@ -26,8 +28,8 @@ typedef struct Task Task;
 
 struct TaskManager {
     Task task[MAX_TASK];
-    uint8_t tCount;
     Timer timer[MAX_TASK];
+    uint8_t tCount;
 };
 
 typedef struct TaskManager TaskManager;
