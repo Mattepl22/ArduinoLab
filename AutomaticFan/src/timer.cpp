@@ -1,7 +1,9 @@
 #include "timer.h"
 
 void timerInit(Timer *t, unsigned long trigger, bool mode) {
-    t->trigger = trigger;
+
+    
+    t->trigger = (trigger == 0) ? 1 : trigger;
     t->mode = mode;
 
     t->previousTime = mode ? micros() : millis();

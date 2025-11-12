@@ -35,7 +35,7 @@ struct TaskManager {
 typedef struct TaskManager TaskManager;
 
 void taskManagerInit(TaskManager *tm);
-bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long timerTrigger, bool timerMode = false);
+bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long timerTrigger = 1, bool timerMode = false);
 void taskManagerRun(TaskManager *tm);
 
 #endif

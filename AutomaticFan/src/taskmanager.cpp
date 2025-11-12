@@ -4,6 +4,7 @@
 void systemInit(System *sys) {
     dhtSensorInit(&sys->dhtSensor, DHT_PIN, DHT_TYPE);
     dataInit(&sys->data);
+    ledInit();
 }
 
 // ---- TASK MANAGER ----

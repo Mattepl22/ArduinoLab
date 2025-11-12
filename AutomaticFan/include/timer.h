@@ -11,7 +11,7 @@ struct Timer {
 
 typedef struct Timer Timer;
 
-void timerInit(Timer *t, unsigned long trigger, bool mode = false);
+void timerInit(Timer *t, unsigned long trigger = 1, bool mode = false);
 bool timerTrigger(Timer *t);
 void timerReset(Timer *t);
 

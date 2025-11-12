@@ -13,6 +13,11 @@
 #define DHT_PIN 13
 #define DHT_TYPE DHT11
 
+// ---- LED ----
+#define BPIN 1
+#define GPIN 2
+#define RPIN 3
+
 // ---- TASK ----
 #define MAX_TASK 10
 

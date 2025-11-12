@@ -13,6 +13,7 @@ void setup() {
     taskManagerInit(&tm);
 
     taskManagerAdd(&tm, dhtSensorTask, &sys, TIMER_DHT_MS, TIMER_MILLIS);
+    taskManagerAdd(&tm, ledTask, &sys);
 }
 
 void loop() {
