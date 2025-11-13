@@ -1,5 +1,6 @@
 #include "sensors.h"
 #include "taskmanager.h"
+#include "utility.h"
 
 // ---- DHT ----
 
@@ -58,6 +59,7 @@ void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev, 
     fm->pinPwm = pinPwm;
     fm->pinRun = pinRun;
     fm->pinRev = pinRev;
+    fm->lastSpeed = 0;
 
     pinMode(pinPwm, OUTPUT);
     pinMode(pinRun, OUTPUT);
@@ -77,5 +79,27 @@ void fanMotorDirection(FanMotor *fm, bool direction) {
 void fanMotorTask(void *param) {
     System *sys = (System *)param;
 
-    
+    Serial.println(sys->data.temperature);
+
+    if (sys->data.newValue) {
+        if(sys->data.temperature <= 20.0) {
+            sys->fanMotor.speed = converter(25, IN_MIN, IN_MAX, OUT_MIN, OUT_MAX);
+        } else if ((sys->data.temperature > 20.0) && (sys->data.temperature <= 25.0)) {
+            sys->fanMotor.speed = converter(50, IN_MIN, IN_MAX, OUT_MIN, OUT_MAX);
+        } else {
+           sys->fanMotor.speed = converter(100, IN_MIN, IN_MAX, OUT_MIN, OUT_MAX);
+        }
+    }
+
+    if ((sys->fanMotor.lastSpeed == 0) && sys->fanMotor.speed != 0) {
+        analogWrite(sys->fanMotor.pinPwm, 255);
+        timerInit(&sys->fanMotor.timer, 200, TIMER_MILLIS);
+        sys->fanMotor.lastSpeed = sys->fanMotor.speed;
+    }
+
+    sys->data.newValue = false;
+
+    if (!timerTrigger(&sys->fanMotor.timer)) return;
+
+    analogWrite(sys->fanMotor.pinPwm, sys->fanMotor.speed);
 }

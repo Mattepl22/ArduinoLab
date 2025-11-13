@@ -14,14 +14,18 @@
 #define DHT_TYPE DHT11
 
 // ---- LED ----
-#define BPIN 2
-#define GPIN 3
-#define RPIN 4
+#define BPIN 8
+#define GPIN 9
+#define RPIN 10
 
 // ---- DC MOTOR ----
 #define PIN_PWM 5
-#define PIN_RUN 6
-#define PIN_REV 7
+#define PIN_RUN 4
+#define PIN_REV 3
+#define IN_MIN 0
+#define IN_MAX 100
+#define OUT_MIN 0
+#define OUT_MAX 255
 #define CLOCKWISE_DIR false
 #define COUNTERCLOCKWISE_DIR true
 

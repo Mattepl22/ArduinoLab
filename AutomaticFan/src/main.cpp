@@ -14,6 +14,7 @@ void setup() {
 
     taskManagerAdd(&tm, dhtSensorTask, &sys, TIMER_DHT_MS, TIMER_MILLIS);
     taskManagerAdd(&tm, ledTask, &sys);
+    taskManagerAdd(&tm, fanMotorTask, &sys);
 }
 
 void loop() {

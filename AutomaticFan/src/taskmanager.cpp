@@ -5,7 +5,7 @@ void systemInit(System *sys) {
     dhtSensorInit(&sys->dhtSensor, DHT_PIN, DHT_TYPE);
     dataInit(&sys->data);
     ledInit();
-    fanMotorInit(&sys->fanMotor, PIN_PWM, PIN_RUN, PIN_REV, CLOCKWISE_DIR);
+    fanMotorInit(&sys->fanMotor, PIN_PWM, PIN_RUN, PIN_REV, COUNTERCLOCKWISE_DIR);
 }
 
 // ---- TASK MANAGER ----

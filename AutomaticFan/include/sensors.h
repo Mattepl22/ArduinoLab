@@ -3,6 +3,7 @@
 
 #include "DHT.h"
 #include "config.h"
+#include "timer.h"
 
 struct System;
 
@@ -30,6 +31,8 @@ struct FanMotor {
     uint8_t pinRun;
     uint8_t pinRev;
     int speed;
+    int lastSpeed;
+    Timer timer;
 };
 
 void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev, bool direction = false);
