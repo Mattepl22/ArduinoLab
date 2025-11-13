@@ -41,8 +41,6 @@ void ledCmd(bool bLedCmd, bool gLedCmd, bool rLedCmd) {
 void ledTask(void *param) {
     System *sys = (System *)param;
 
-    Serial.println(sys->data.temperature);
-
     if (!sys->data.newValue) return;
 
     if (sys->data.temperature <= 20.0) {
@@ -74,4 +72,10 @@ void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev, 
 void fanMotorDirection(FanMotor *fm, bool direction) {
     digitalWrite(fm->pinRun, !direction);
     digitalWrite(fm->pinRev, direction);
+}
+
+void fanMotorTask(void *param) {
+    System *sys = (System *)param;
+
+    
 }

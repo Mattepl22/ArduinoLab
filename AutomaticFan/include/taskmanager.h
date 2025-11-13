@@ -11,6 +11,7 @@
 struct System {
     DhtSensor dhtSensor;
     Data data;
+    FanMotor fanMotor;
 };
 
 typedef struct System System;

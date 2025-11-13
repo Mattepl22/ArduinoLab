@@ -19,9 +19,9 @@
 #define RPIN 4
 
 // ---- DC MOTOR ----
-#define PIN_PWM 
-#define PIN_RUN
-#define PIN_REV
+#define PIN_PWM 5
+#define PIN_RUN 6
+#define PIN_REV 7
 #define CLOCKWISE_DIR false
 #define COUNTERCLOCKWISE_DIR true
 
