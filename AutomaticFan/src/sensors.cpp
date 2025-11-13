@@ -56,6 +56,22 @@ void ledTask(void *param) {
 
 // ---- DC MOTOR ----
 
-void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev) {
+void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev, bool direction) {
+    fm->pinPwm = pinPwm;
+    fm->pinRun = pinRun;
+    fm->pinRev = pinRev;
 
+    pinMode(pinPwm, OUTPUT);
+    pinMode(pinRun, OUTPUT);
+    pinMode(pinRev, OUTPUT);
+
+
+    fanMotorDirection(fm, direction);
+    analogWrite(pinPwm, 0);
+}
+
+// Scrivo la direzione sui pin della direzione
+void fanMotorDirection(FanMotor *fm, bool direction) {
+    digitalWrite(fm->pinRun, !direction);
+    digitalWrite(fm->pinRev, direction);
 }

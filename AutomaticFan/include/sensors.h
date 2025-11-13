@@ -32,7 +32,8 @@ struct FanMotor {
     int speed;
 };
 
-void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev);
+void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev, bool direction = false);
+void fanMotorDirection(FanMotor *fm, bool direction);
 void fanMotorTask(void *param);
 
 #endif
