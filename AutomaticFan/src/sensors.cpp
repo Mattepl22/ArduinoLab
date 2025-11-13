@@ -53,3 +53,9 @@ void ledTask(void *param) {
         ledCmd(false, false, true);
     }
 }
+
+// ---- DC MOTOR ----
+
+void fanMotorInit(FanMotor *fm, uint8_t pinPwm, uint8_t pinRun, uint8_t pinRev) {
+
+}

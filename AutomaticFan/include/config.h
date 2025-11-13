@@ -18,6 +18,11 @@
 #define GPIN 3
 #define RPIN 4
 
+// ---- DC MOTOR ----
+#define PIN_PWM 
+#define PIN_RUN
+#define PIN_REV
+
 // ---- TASK ----
 #define MAX_TASK 10
 
