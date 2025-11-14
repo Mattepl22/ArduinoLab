@@ -12,14 +12,14 @@ void taskManagerInit(TaskManager *tm) {
     tm->tCount = 0;
 }
 
-bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param) {
+bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long tTrigger, bool tMode) {
     if (tm->tCount >= MAX_TASK) return false;
 
     Task *t = &tm->task[tm->tCount];
     t->callback = callback;
     t->param = param;
 
-    //Aggiungere parte per timer per temporizzare le task
+    timerInit(&tm->timer[tm->tCount], tTrigger, tMode);
 
     tm->tCount++;
 
@@ -28,6 +28,8 @@ bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param) {
 
 void taskManagerRun(TaskManager *tm) {
     for (int index = 0; index < tm->tCount; index++) {
-        tm->task[index].callback(tm->task[index].param);
+        if (timerTrigger(&tm->timer[index])) {
+            tm->task[index].callback(tm->task[index].param);
+        }
     }
 }

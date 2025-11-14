@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include "config.h"
+#include "timer.h"
 
 // ---- SYSTEM ----
 
@@ -24,6 +25,7 @@ struct Task {
 
 struct TaskManager {
     Task task[MAX_TASK];
+    Timer timer[MAX_TASK];
     uint8_t tCount;
 };
 
@@ -31,7 +33,7 @@ typedef struct Task Task;
 typedef struct TaskManager TaskManager;
 
 void taskManagerInit(TaskManager *tm);
-bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param);
+bool taskManagerAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long tTrigger = 1, bool tMode = false);
 void taskManagerRun(TaskManager *tm);
 
 #endif
