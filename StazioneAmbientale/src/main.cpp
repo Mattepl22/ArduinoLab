@@ -11,6 +11,9 @@ void setup() {
 
   systemInit(&sys);
   taskManagerInit(&tm);
+
+  taskManagerAdd(&tm, dhtSensorTask, &sys, DHT_TRIGGER, TIMER_MILLIS);
+  taskManagerAdd(&tm, dataPrint, &sys, DATA_TRIGGER, TIMER_MILLIS);
 }
 
 void loop() {

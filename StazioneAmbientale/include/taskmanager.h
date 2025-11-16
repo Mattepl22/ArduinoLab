@@ -5,11 +5,25 @@
 
 #include "config.h"
 #include "timer.h"
+#include "sensors.h"
+
+// ---- COMUNICATION ----
+
+struct Data {
+    float temperature;
+    float humidity;
+};
+
+typedef struct Data Data;
+
+void dataInit(Data *d);
+void dataPrint(void *param);
 
 // ---- SYSTEM ----
 
 struct System {
-
+    DhtSensor dhtSensor;
+    Data data;
 };
 
 typedef struct System System;

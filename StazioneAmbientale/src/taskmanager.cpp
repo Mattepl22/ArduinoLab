@@ -1,9 +1,27 @@
 #include "taskmanager.h"
 
+// ---- COMUNICATION ----
+
+void dataInit(Data *d) {
+    d->temperature = 0.0;
+    d->humidity = 0.0;
+}
+
+void dataPrint(void *param){
+    System *sys = (System *)param;
+
+    Serial.print("{temperature: ");
+    Serial.print(sys->data.temperature);
+    Serial.print("; humidity: ");
+    Serial.print(sys->data.humidity);
+    Serial.println("}");
+}
+
 // ---- SYSTEM ----
 
 void systemInit(System *sys) {
-
+    dhtSensorInit(&sys->dhtSensor, DHT_PIN, DHT_TYPE);
+    dataInit(&sys->data);
 }
 
 // ---- TASKMANAGER ----
