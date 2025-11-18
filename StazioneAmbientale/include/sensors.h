@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include "DHT.h"
+#include "utility.h"
 
 // ---- DHT ----
 
@@ -15,5 +16,17 @@ typedef struct DhtSensor DhtSensor;
 
 void dhtSensorInit(DhtSensor *ds, uint8_t dhtPin, uint8_t dhtType); //Inizializzazione della struttura
 void dhtSensorTask(void *param);
+
+// ---- PHOTO RESISTOR ----
+
+struct PrSensor {
+    uint8_t prPin;
+    MediaMobile mediaMobile;
+};
+
+typedef struct PrSensor PrSensor;
+
+void prSensorInit(PrSensor *ps, uint8_t pin);
+void prSensorTask(void *param);
 
 #endif

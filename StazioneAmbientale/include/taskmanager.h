@@ -12,6 +12,7 @@
 struct Data {
     float temperature;
     float humidity;
+    int light;
 };
 
 typedef struct Data Data;
@@ -23,6 +24,7 @@ void dataPrint(void *param);
 
 struct System {
     DhtSensor dhtSensor;
+    PrSensor prSensor;
     Data data;
 };
 

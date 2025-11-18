@@ -5,6 +5,7 @@
 void dataInit(Data *d) {
     d->temperature = 0.0;
     d->humidity = 0.0;
+    d->light = 0;
 }
 
 void dataPrint(void *param){
@@ -22,6 +23,7 @@ void dataPrint(void *param){
 void systemInit(System *sys) {
     dhtSensorInit(&sys->dhtSensor, DHT_PIN, DHT_TYPE);
     dataInit(&sys->data);
+    prSensorInit(&sys->prSensor, PR_PIN);
 }
 
 // ---- TASKMANAGER ----

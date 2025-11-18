@@ -5,6 +5,9 @@
 #define TIMER_MILLIS false
 #define TIMER_MICROS true
 
+// ---- MEDIA MOBILE ----
+#define MAX_INDEX 10
+
 // ---- TASK ----
 #define MAX_TASK 10
 
@@ -12,6 +15,10 @@
 #define DHT_PIN 17
 #define DHT_TYPE DHT11
 #define DHT_TRIGGER 2000
+
+// ---- PHOTORES ----
+#define PR_PIN 32
+#define PR_TRIGGER 2000
 
 // ---- DATA ----
 #define DATA_TRIGGER 4000
