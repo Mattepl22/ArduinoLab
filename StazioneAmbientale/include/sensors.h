@@ -21,12 +21,13 @@ void dhtSensorTask(void *param);
 
 struct PrSensor {
     uint8_t prPin;
+    int maxValue;
     MediaMobile mediaMobile;
 };
 
 typedef struct PrSensor PrSensor;
 
-void prSensorInit(PrSensor *ps, uint8_t pin);
+void prSensorInit(PrSensor *ps, uint8_t pin, int maxValue);
 void prSensorTask(void *param);
 
 #endif

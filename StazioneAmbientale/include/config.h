@@ -17,8 +17,9 @@
 #define DHT_TRIGGER 2000
 
 // ---- PHOTORES ----
-#define PR_PIN 32
-#define PR_TRIGGER 2000
+#define PR_PIN 34
+#define PR_TRIGGER 5000
+#define MAX_IN 4095
 
 // ---- DATA ----
 #define DATA_TRIGGER 4000

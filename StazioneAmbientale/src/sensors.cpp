@@ -21,10 +21,12 @@ void dhtSensorTask(void *param) {
 
 // ---- PHOTO RESISTOR ----
 
-void prSensorInit(PrSensor *ps, uint8_t pin) {
+void prSensorInit(PrSensor *ps, uint8_t pin, int maxValue) {
     
     ps->prPin = pin;
     pinMode(pin, INPUT);
+
+    ps->maxValue = maxValue;
     
     mediaMobileInit(&ps->mediaMobile);
 }
@@ -35,6 +37,6 @@ void prSensorTask(void *param) {
     int value = mediaMobileTask(&sys->prSensor.mediaMobile, analogRead(sys->prSensor.prPin));
     
     if (sys->prSensor.mediaMobile.full) {
-        sys->data.light = value;
+        sys->data.light = sys->prSensor.maxValue - value;
     }
 }

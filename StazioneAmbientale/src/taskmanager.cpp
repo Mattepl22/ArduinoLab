@@ -15,6 +15,8 @@ void dataPrint(void *param){
     Serial.print(sys->data.temperature);
     Serial.print("; humidity: ");
     Serial.print(sys->data.humidity);
+    Serial.print("; light: ");
+    Serial.print(sys->data.light);
     Serial.println("}");
 }
 
@@ -23,7 +25,7 @@ void dataPrint(void *param){
 void systemInit(System *sys) {
     dhtSensorInit(&sys->dhtSensor, DHT_PIN, DHT_TYPE);
     dataInit(&sys->data);
-    prSensorInit(&sys->prSensor, PR_PIN);
+    prSensorInit(&sys->prSensor, PR_PIN, MAX_IN);
 }
 
 // ---- TASKMANAGER ----

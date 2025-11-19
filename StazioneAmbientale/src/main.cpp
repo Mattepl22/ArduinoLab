@@ -13,6 +13,7 @@ void setup() {
   taskManagerInit(&tm);
 
   taskManagerAdd(&tm, dhtSensorTask, &sys, DHT_TRIGGER, TIMER_MILLIS);
+  taskManagerAdd(&tm, prSensorTask, &sys, PR_TRIGGER, TIMER_MICROS);
   taskManagerAdd(&tm, dataPrint, &sys, DATA_TRIGGER, TIMER_MILLIS);
 }
 
