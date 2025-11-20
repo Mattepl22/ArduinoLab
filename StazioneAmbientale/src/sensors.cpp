@@ -7,6 +7,8 @@ void dhtSensorInit(DhtSensor *ds, uint8_t dhtPin, uint8_t dhtType) {
     
     ds->dht = new DHT(dhtPin, dhtType);
     ds->dht->begin();
+
+    ds->newValue = false;
 }
 
 void dhtSensorTask(void *param) {
@@ -17,6 +19,8 @@ void dhtSensorTask(void *param) {
 
     if (!isnan(temp)) sys->data.temperature = temp;
     if (!isnan(hum)) sys->data.humidity = hum;
+
+    sys->dhtSensor.newValue = true;
 }
 
 // ---- PHOTO RESISTOR ----
@@ -29,6 +33,8 @@ void prSensorInit(PrSensor *ps, uint8_t pin, int maxValue) {
     ps->maxValue = maxValue;
     
     mediaMobileInit(&ps->mediaMobile);
+
+    ps->newValue = false;
 }
 
 void prSensorTask(void *param) {
@@ -38,5 +44,7 @@ void prSensorTask(void *param) {
     
     if (sys->prSensor.mediaMobile.full) {
         sys->data.light = sys->prSensor.maxValue - value;
+
+        sys->prSensor.newValue = true;
     }
 }

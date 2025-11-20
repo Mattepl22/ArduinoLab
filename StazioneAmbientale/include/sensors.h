@@ -10,6 +10,7 @@
 
 struct DhtSensor {
     DHT *dht;
+    bool newValue;
 };
 
 typedef struct DhtSensor DhtSensor;
@@ -23,6 +24,7 @@ struct PrSensor {
     uint8_t prPin;
     int maxValue;
     MediaMobile mediaMobile;
+    bool newValue;
 };
 
 typedef struct PrSensor PrSensor;

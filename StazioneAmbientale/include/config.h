@@ -18,7 +18,7 @@
 
 // ---- PHOTORES ----
 #define PR_PIN 34
-#define PR_TRIGGER 5000
+#define PR_TRIGGER 100
 #define MAX_IN 4095
 
 // ---- DATA ----
