@@ -18,3 +18,16 @@ bool tmAdd(TaskManager *tm, void (*callback)(void *), void *param, unsigned long
 
     return true;
 }
+
+void tmRun(TaskManager *tm) {
+    //Ciclo tutte le task ed eseguo solo quelle che devo eseguire
+    for (int index = 0; index < tm->tCount; index++) {
+        if (timerTrigger(&tm->timer[index])) {
+            //Chiamo la funzione dedicata
+            //La funzione si trova nella posizione index dell'array
+            //".callback" è la funzione
+            //".param" sono i parametri
+            tm->task[index].callback(tm->task[index].param);
+        }
+    }
+}
