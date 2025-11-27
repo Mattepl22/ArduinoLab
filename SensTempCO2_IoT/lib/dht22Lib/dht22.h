@@ -9,11 +9,10 @@ class dht22 {
         uint8_t _dht22Pin;
 
         void beginComunication();
-        void waitResponse();
+        bool waitResponse();
 
     public:
         dht22(uint8_t dht22Pin);
-        void begin();
         float readTemperature();
         int readHumidity();
 };
